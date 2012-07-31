@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>jQuery FriendURL plugin</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<style type="text/css">
+		pre{background-color: #f0f0f0; padding: 10px; border: solid 1px #ccc;}
+		</style>
+	</head>
+	<body>
+		<h1>jQuery FriendURL plugin</h1>	
+						
+		<h3>Example 1</h3>
+		<pre>&lt;script type="text/javascript"&gt;
+$(function(){
+	$('#title1').friendurl({id : 'link1'});
+});
+&lt;/script&gt;</pre>
+						
+		<form action="index.html" method="get">
+			<label for="title1">Title</label><br />
+			<input type="text" name="title1" id="title1" style="width: 400px" /><br />
+			<label for="link1">Friendly URL</label><br />
+			<input type="text" name="link1" id="link1" style="width: 400px" readonly="readonly" />
+		</form>
+					
+		<h3>Example 2</h3>
+		<pre>&lt;script type="text/javascript"&gt;
+$(function(){
+	$('#title2').friendurl({id : 'link2', divider: '_'});
+});
+&lt;/script&gt;</pre>
+		
+		<form action="index.html" method="get">
+			<label for="title2">Title</label><br />
+			<input type="text" name="title2" id="title2" style="width: 400px" /><br />
+			<label for="link2">Friendly URL</label><br />
+			<input type="text" name="link2" id="link2" style="width: 400px" readonly="readonly" />
+		</form>
+		
+		<h3>Example 3</h3>
+		<p>In version 1.5 the <i>transliterate</i> parameter was introduced.</p>
+		<pre>&lt;script type="text/javascript"&gt;
+$(function(){
+	$('#title3').friendurl({id : 'link3', divider: '_', transliterate: true});
+});
+&lt;/script&gt;</pre>
+		
+		<form action="index.html" method="get">
+			<label for="title3">Title</label><br />
+			<input type="text" name="title3" id="title3" style="width: 400px" /><br />
+			<label for="link3">Friendly URL</label><br />
+			<input type="text" name="link3" id="link3" style="width: 400px" readonly="readonly" />
+		</form>		
+		
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript" src="../jquery.friendurl.js"></script>
+		<script type="text/javascript">
+		$(function(){
+			$('#title1').friendurl({id : 'link1'});
+			$('#title2').friendurl({id : 'link2', divider: '_'});
+			$('#title3').friendurl({id : 'link3', divider: '_', transliterate: true});
+		});
+		</script>
+	</body>
+</html>

@@ -1,9 +1,9 @@
 /*
- * jQuery FriendURL plugin 1.5.1
+ * jQuery FriendURL plugin 1.6
  *
- * http://www.bulgaria-web-developers.com/blog/2009/03/18/jquery-seo-friendly-url-plugin/
+ * http://www.bulgaria-web-developers.com/projects/javascript/friendurl/
  *
- * Copyright (c) 2009 Dimitar Ivanov
+ * Copyright (c) 2009-2012 Dimitar Ivanov
  *
  * Dual licensed under the MIT and GPL licenses:
  *   http://www.opensource.org/licenses/mit-license.php
@@ -11,7 +11,7 @@
  * 
  * Bugfixed by: Vitaliy Stepanenko (http://nayjest.ru)    
  */
-(function($){
+(function ($, undefined) {
 	
 	var cyrillic = [
 		"а", "б", "в", "г", "д", "е", "ж", "з", "и", "й", "к", "л", "м", "н", "о",
@@ -31,18 +31,72 @@
 	
 	var string = '';
 	
-	$.fn.friendurl = function(options){
-
-		var defaults = {
+	function convert (text) {
+		string = str_replace(cyrillic, latin, text);
+		return string;
+	}
+		
+	function str_replace (search, replace, subject, count) {
+	    // http://kevin.vanzonneveld.net
+	    // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+	    // +   improved by: Gabriel Paderni
+	    // +   improved by: Philip Peterson
+	    // +   improved by: Simon Willison (http://simonwillison.net)
+	    // +    revised by: Jonas Raoni Soares Silva (http://www.jsfromhell.com)
+	    // +   bugfixed by: Anton Ongson
+	    // +      input by: Onno Marsman
+	    // +   improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+	    // +    tweaked by: Onno Marsman
+	    // +      input by: Brett Zamir (http://brett-zamir.me)
+	    // +   bugfixed by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+	    // +   input by: Oleg Eremeev
+	    // +   improved by: Brett Zamir (http://brett-zamir.me)
+	    // +   bugfixed by: Oleg Eremeev
+	    // %          note 1: The count parameter must be passed as a string in order
+	    // %          note 1:  to find a global variable in which the result will be given
+	    // *     example 1: str_replace(' ', '.', 'Kevin van Zonneveld');
+	    // *     returns 1: 'Kevin.van.Zonneveld'
+	    // *     example 2: str_replace(['{name}', 'l'], ['hello', 'm'], '{name}, lars');
+	    // *     returns 2: 'hemmo, mars'
+	
+	    var i = 0, j = 0, temp = '', repl = '', sl = 0, fl = 0,
+	            f = [].concat(search),
+	            r = [].concat(replace),
+	            s = subject,
+	            ra = r instanceof Array, sa = s instanceof Array;
+	    s = [].concat(s);
+	    if (count) {
+	        this.window[count] = 0;
+	    }
+	
+	    for (i=0, sl=s.length; i < sl; i++) {
+	        if (s[i] === '') {
+	            continue;
+	        }
+	        for (j=0, fl=f.length; j < fl; j++) {
+	            temp = s[i]+'';
+	            repl = ra ? (r[j] !== undefined ? r[j] : '') : r[0];
+	            s[i] = (temp).split(f[j]).join(repl);
+	            if (count && s[i] !== temp) {
+	                this.window[count] += (temp.length-s[i].length)/f[j].length;}
+	        }
+	    }
+	    return sa ? s : s[0];
+	}
+	
+	function Friendurl () {
+		this.defaults = {
 			divider : '-',
 			transliterate: false
 		};
-		
-		var options = $.extend(defaults, options);
-		
-		return this.each(function(){
-						
-			$(this).keyup(function(){
+	}
+	
+	Friendurl.prototype = {
+		_initFriendurl: function (target, options) {
+			var self = this;
+			$(target).keyup(function () {
+				options = $.extend(self.defaults, options);
+
 				var url = $(this).val()
     				.toLowerCase() // change everything to lowercase
     				.replace(/^\s+|\s+$/g, "") // trim leading and trailing spaces		
@@ -57,64 +111,28 @@
     				url = convert(url);
     			}
     			
-				$('#' + options.id).val(url);	
+    			var $el = $('#' + options.id);
+
+    			if ($el.length > 0) {
+    				var nodeName = $el.get(0).tagName;
+    				switch (nodeName) {
+    					case 'INPUT':
+    						$el.val(url);
+    						break;
+    					default:
+    						$el.text(url);
+    				}
+    			}
 			});
-						
-		});
-		
-		function convert (text) {
-			string = str_replace(cyrillic, latin, text);
-			return string;
 		}
-		
-		function str_replace (search, replace, subject, count) {
-		    // http://kevin.vanzonneveld.net
-		    // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-		    // +   improved by: Gabriel Paderni
-		    // +   improved by: Philip Peterson
-		    // +   improved by: Simon Willison (http://simonwillison.net)
-		    // +    revised by: Jonas Raoni Soares Silva (http://www.jsfromhell.com)
-		    // +   bugfixed by: Anton Ongson
-		    // +      input by: Onno Marsman
-		    // +   improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-		    // +    tweaked by: Onno Marsman
-		    // +      input by: Brett Zamir (http://brett-zamir.me)
-		    // +   bugfixed by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-		    // +   input by: Oleg Eremeev
-		    // +   improved by: Brett Zamir (http://brett-zamir.me)
-		    // +   bugfixed by: Oleg Eremeev
-		    // %          note 1: The count parameter must be passed as a string in order
-		    // %          note 1:  to find a global variable in which the result will be given
-		    // *     example 1: str_replace(' ', '.', 'Kevin van Zonneveld');
-		    // *     returns 1: 'Kevin.van.Zonneveld'
-		    // *     example 2: str_replace(['{name}', 'l'], ['hello', 'm'], '{name}, lars');
-		    // *     returns 2: 'hemmo, mars'
-		
-		    var i = 0, j = 0, temp = '', repl = '', sl = 0, fl = 0,
-		            f = [].concat(search),
-		            r = [].concat(replace),
-		            s = subject,
-		            ra = r instanceof Array, sa = s instanceof Array;
-		    s = [].concat(s);
-		    if (count) {
-		        this.window[count] = 0;
-		    }
-		
-		    for (i=0, sl=s.length; i < sl; i++) {
-		        if (s[i] === '') {
-		            continue;
-		        }
-		        for (j=0, fl=f.length; j < fl; j++) {
-		            temp = s[i]+'';
-		            repl = ra ? (r[j] !== undefined ? r[j] : '') : r[0];
-		            s[i] = (temp).split(f[j]).join(repl);
-		            if (count && s[i] !== temp) {
-		                this.window[count] += (temp.length-s[i].length)/f[j].length;}
-		        }
-		    }
-		    return sa ? s : s[0];
-		}
-		
 	};
 	
+	$.friendurl = new Friendurl();
+	$.friendurl.version = "1.6";
+	
+	$.fn.friendurl = function (options) {	
+		return this.each(function () {
+			$.friendurl._initFriendurl(this, options);
+		});
+	};
 })(jQuery);
