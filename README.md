@@ -1,0 +1,4 @@
+friendurl
+=========
+
+jQuery FriendURL plugin
