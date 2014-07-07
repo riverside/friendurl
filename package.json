@@ -1,0 +1,21 @@
+{
+	"name": "friendurl",
+	"version: "1.7.0",
+	"description": "Makes your titles or url's SEO friendly",
+	"keywords": ["jquery", "seo", "friendly", "url"],
+	"homepage": "https://github.com/riverside/friendurl",
+	"bugs": "https://github.com/riverside/friendurl/issues",
+	"license": "MIT",
+	"author": {
+		"name": "Dimitar Ivanov",
+		"url": "http://zinoui.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/riverside/friendurl.git"
+	},
+	"dependencies": {
+		"jquery": "*"
+	},
+	"main": "jquery.friendurl.js"
+}
