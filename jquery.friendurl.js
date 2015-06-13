@@ -12,7 +12,7 @@
  * Bugfixed by: Vitaliy Stepanenko (http://nayjest.ru)    
  */
 (function ($, undefined) {
-	
+
 	var cyrillic = [
 		"а", "б", "в", "г", "д", "е", "ж", "з", "и", "й", "к", "л", "м", "н", "о",
 		"п", "р", "с", "т", "у", "ф", "х", "ц", "ч", "ш", "щ", "ъ", "ь", "ю", "я",
@@ -24,7 +24,7 @@
 		"í", "Ó", "ó", "Ô", "ô", "Õ", "õ", "Ú", "ú", "Ñ", "ñ", "È", "è"
 	];
 
-	var latin = [
+	var latin_for_cyrylic = [
 		"a", "b", "v", "g", "d", "e", "zh", "z", "i", "y", "k", "l", "m", "n", "o", 
 		"p", "r", "s", "t", "u", "f", "h", "ts", "ch", "sh", "sht", "a", "y", "yu", "ya",
 		"A", "B", "B", "G", "D", "E", "Zh", "Z", "I", "Y", "K", "L", "M", "N", "O", 
@@ -34,11 +34,20 @@
 		"A", "a", "A", "a", "A", "a", "A", "a", "C", "c", "E", "e", "E", "e", "I",
 		"i", "O", "o", "O", "o", "O", "o", "U", "u", "N", "n", "E", "e"
 	];
+
+	var polish = [
+		"ą", "ć", "ę", "ł", "ń", "ó", "ś", "ź", "ż", "Ą", "Ć", "Ę", "Ł", "Ń", "Ó", "Ś", "Ź", "Ż"
+	];
 	
+	var latin_for_polish = [
+		"a", "c", "e", "l", "n", "o", "s", "z", "z", "A", "C", "E", "L", "N", "O", "S", "Z", "Z"
+	];
+
 	var string = '';
 	
 	function convert (text) {
-		string = str_replace(cyrillic, latin, text);
+		string = str_replace(cyrillic, latin_for_cyrylic, text);
+		string = str_replace(polish, latin_for_polish, text);
 		return string;
 	}
 		
@@ -93,7 +102,8 @@
 	function Friendurl () {
 		this.defaults = {
 			divider : '-',
-			transliterate: false
+			transliterate : false,
+			prepend : ''
 		};
 	}
 	
@@ -118,6 +128,8 @@
     				.replace(/^-+|-+$/g, "") // trim leading and trailing hyphens
     				.replace(/[-]+/g, options.divider)				
     			;
+
+    			url = options.prepend + url;
     			
     			var $el = $('#' + options.id);
 
