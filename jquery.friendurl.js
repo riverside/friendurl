@@ -1,9 +1,9 @@
 /*
- * jQuery FriendURL plugin 1.7
+ * jQuery FriendURL plugin 1.7.1
  *
  * http://www.bulgaria-web-developers.com/projects/javascript/friendurl/
  *
- * Copyright (c) 2009-2012 Dimitar Ivanov
+ * Copyright (c) 2009-2015 Dimitar Ivanov
  *
  * Dual licensed under the MIT and GPL licenses:
  *   http://www.opensource.org/licenses/mit-license.php
@@ -101,7 +101,7 @@
 		_initFriendurl: function (target, options) {
 			var self = this;
 			$(target).keyup(function () {
-				options = $.extend(self.defaults, options);
+				options = $.extend({}, self.defaults, options);
 
 				var url = $(this).val();
 				
@@ -136,7 +136,7 @@
 	};
 	
 	$.friendurl = new Friendurl();
-	$.friendurl.version = "1.7";
+	$.friendurl.version = "1.7.1";
 	
 	$.fn.friendurl = function (options) {	
 		return this.each(function () {
