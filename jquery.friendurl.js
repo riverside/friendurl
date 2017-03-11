@@ -1,7 +1,7 @@
 /*
  * jQuery FriendURL plugin 1.7.1
  *
- * http://www.bulgaria-web-developers.com/projects/javascript/friendurl/
+ * https://projects.zinoui.com/friendurl/
  *
  * Copyright (c) 2009-2015 Dimitar Ivanov
  *

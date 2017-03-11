@@ -4,4 +4,4 @@
 
 Version 1.7.1
 
-www.bulgaria-web-developers.com/projects/javascript/friendurl/
+https://projects.zinoui.com/friendurl/
