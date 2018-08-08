@@ -21,27 +21,29 @@
 		"Ї", "ї", "Є", "є", "Ы", "ы", "Ё", "ё",
 		"ı", "İ", "ğ", "Ğ", "ü", "Ü", "ş", "Ş", "ö", "Ö", "ç", "Ç",
 		"Á", "á", "Â", "â", "Ã", "ã", "À", "à", "Ç", "ç", "É", "é", "Ê", "ê", "Í", 
-		"í", "Ó", "ó", "Ô", "ô", "Õ", "õ", "Ú", "ú", "Ñ", "ñ", "È", "è"
+		"í", "Ó", "ó", "Ô", "ô", "Õ", "õ", "Ú", "ú", "Ñ", "ñ", "È", "è",
+		"ű", "Ű", "ő", "Ő"
 	];
 
 	var latin = [
-		"a", "b", "v", "g", "d", "e", "zh", "z", "i", "y", "k", "l", "m", "n", "o", 
+		"a", "b", "v", "g", "d", "e", "zh", "z", "i", "y", "k", "l", "m", "n", "o",
 		"p", "r", "s", "t", "u", "f", "h", "ts", "ch", "sh", "sht", "a", "y", "yu", "ya",
-		"A", "B", "B", "G", "D", "E", "Zh", "Z", "I", "Y", "K", "L", "M", "N", "O", 
+		"A", "B", "B", "G", "D", "E", "Zh", "Z", "I", "Y", "K", "L", "M", "N", "O",
 		"P", "R", "S", "T", "U", "F", "H", "Ts", "Ch", "Sh", "Sht", "A", "Y", "Yu", "Ya",
 		"I", "i", "Ye", "ye", "I", "i", "Yo", "yo",
 		"i", "I", "g", "G", "u", "U", "s", "S", "o", "O", "c", "C",
 		"A", "a", "A", "a", "A", "a", "A", "a", "C", "c", "E", "e", "E", "e", "I",
-		"i", "O", "o", "O", "o", "O", "o", "U", "u", "N", "n", "E", "e"
+		"i", "O", "o", "O", "o", "O", "o", "U", "u", "N", "n", "E", "e",
+        "u", "U", "o", "O"
 	];
-	
+
 	var string = '';
-	
+
 	function convert (text) {
 		string = str_replace(cyrillic, latin, text);
 		return string;
 	}
-		
+
 	function str_replace (search, replace, subject, count) {
 	    // http://kevin.vanzonneveld.net
 	    // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
@@ -64,6 +66,7 @@
 	    // *     returns 1: 'Kevin.van.Zonneveld'
 	    // *     example 2: str_replace(['{name}', 'l'], ['hello', 'm'], '{name}, lars');
 	    // *     returns 2: 'hemmo, mars'
+		// +   improved by: Komesz
 	
 	    var i = 0, j = 0, temp = '', repl = '', sl = 0, fl = 0,
 	            f = [].concat(search),
