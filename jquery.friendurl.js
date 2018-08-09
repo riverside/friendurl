@@ -1,9 +1,9 @@
 /*
- * jQuery FriendURL plugin 1.7.1
+ * jQuery FriendURL plugin 1.7.2
  *
  * https://projects.zinoui.com/friendurl/
  *
- * Copyright (c) 2009-2015 Dimitar Ivanov
+ * Copyright (c) 2009-2018 Dimitar Ivanov
  *
  * Dual licensed under the MIT and GPL licenses:
  *   http://www.opensource.org/licenses/mit-license.php
@@ -45,29 +45,7 @@
 		return string;
 	}
 		
-	function str_replace (search, replace, subject, count) {
-	    // http://kevin.vanzonneveld.net
-	    // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-	    // +   improved by: Gabriel Paderni
-	    // +   improved by: Philip Peterson
-	    // +   improved by: Simon Willison (http://simonwillison.net)
-	    // +    revised by: Jonas Raoni Soares Silva (http://www.jsfromhell.com)
-	    // +   bugfixed by: Anton Ongson
-	    // +      input by: Onno Marsman
-	    // +   improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-	    // +    tweaked by: Onno Marsman
-	    // +      input by: Brett Zamir (http://brett-zamir.me)
-	    // +   bugfixed by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-	    // +   input by: Oleg Eremeev
-	    // +   improved by: Brett Zamir (http://brett-zamir.me)
-	    // +   bugfixed by: Oleg Eremeev
-	    // %          note 1: The count parameter must be passed as a string in order
-	    // %          note 1:  to find a global variable in which the result will be given
-	    // *     example 1: str_replace(' ', '.', 'Kevin van Zonneveld');
-	    // *     returns 1: 'Kevin.van.Zonneveld'
-	    // *     example 2: str_replace(['{name}', 'l'], ['hello', 'm'], '{name}, lars');
-	    // *     returns 2: 'hemmo, mars'
-	
+	function str_replace (search, replace, subject, count) {	
 	    var i = 0, j = 0, temp = '', repl = '', sl = 0, fl = 0,
 	            f = [].concat(search),
 	            r = [].concat(replace),
@@ -109,37 +87,37 @@
 				var url = $(this).val();
 				
 				if (options.transliterate) {
-    				url = convert(url);
-    			}
+    					url = convert(url);
+    				}
 
 				url = url
-    				.toLowerCase() // change everything to lowercase
-    				.replace(/^\s+|\s+$/g, "") // trim leading and trailing spaces		
-    				.replace(/[_|\s]+/g, "-") // change all spaces and underscores to a hyphen
-    				.replace(/[^a-z\u0400-\u04FF0-9-]+/g, "") // remove all non-cyrillic, non-numeric characters except the hyphen
-    				.replace(/[-]+/g, "-") // replace multiple instances of the hyphen with a single instance
-    				.replace(/^-+|-+$/g, "") // trim leading and trailing hyphens
-    				.replace(/[-]+/g, options.divider)				
-    			;
+					.toLowerCase() // change everything to lowercase
+					.replace(/^\s+|\s+$/g, "") // trim leading and trailing spaces		
+					.replace(/[_|\s]+/g, "-") // change all spaces and underscores to a hyphen
+					.replace(/[^a-z\u0400-\u04FF0-9-]+/g, "") // remove all non-cyrillic, non-numeric characters except the hyphen
+					.replace(/[-]+/g, "-") // replace multiple instances of the hyphen with a single instance
+					.replace(/^-+|-+$/g, "") // trim leading and trailing hyphens
+					.replace(/[-]+/g, options.divider)				
+				;
     			
-    			var $el = $('#' + options.id);
+				var $el = $('#' + options.id);
 
-    			if ($el.length > 0) {
-    				var nodeName = $el.get(0).tagName;
-    				switch (nodeName) {
-    					case 'INPUT':
-    						$el.val(url);
-    						break;
-    					default:
-    						$el.text(url);
-    				}
-    			}
+				if ($el.length > 0) {
+					var nodeName = $el.get(0).tagName;
+					switch (nodeName) {
+					case 'INPUT':
+						$el.val(url);
+						break;
+					default:
+						$el.text(url);
+					}
+				}
 			});
 		}
 	};
 	
 	$.friendurl = new Friendurl();
-	$.friendurl.version = "1.7.1";
+	$.friendurl.version = "1.7.2";
 	
 	$.fn.friendurl = function (options) {	
 		return this.each(function () {
