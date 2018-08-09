@@ -9,7 +9,8 @@
  *   http://www.opensource.org/licenses/mit-license.php
  *   http://www.gnu.org/licenses/gpl.html
  * 
- * Bugfixed by: Vitaliy Stepanenko (http://nayjest.ru)    
+ * Bugfixed by: Vitaliy Stepanenko (http://nayjest.ru)
+ * Improved by: Komesz (https://github.com/Komesz)  
  */
 (function ($, undefined) {
 	
@@ -21,7 +22,8 @@
 		"Ї", "ї", "Є", "є", "Ы", "ы", "Ё", "ё",
 		"ı", "İ", "ğ", "Ğ", "ü", "Ü", "ş", "Ş", "ö", "Ö", "ç", "Ç",
 		"Á", "á", "Â", "â", "Ã", "ã", "À", "à", "Ç", "ç", "É", "é", "Ê", "ê", "Í", 
-		"í", "Ó", "ó", "Ô", "ô", "Õ", "õ", "Ú", "ú", "Ñ", "ñ", "È", "è"
+		"í", "Ó", "ó", "Ô", "ô", "Õ", "õ", "Ú", "ú", "Ñ", "ñ", "È", "è",
+		"ű", "Ű", "ő", "Ő"
 	];
 
 	var latin = [
@@ -32,7 +34,8 @@
 		"I", "i", "Ye", "ye", "I", "i", "Yo", "yo",
 		"i", "I", "g", "G", "u", "U", "s", "S", "o", "O", "c", "C",
 		"A", "a", "A", "a", "A", "a", "A", "a", "C", "c", "E", "e", "E", "e", "I",
-		"i", "O", "o", "O", "o", "O", "o", "U", "u", "N", "n", "E", "e"
+		"i", "O", "o", "O", "o", "O", "o", "U", "u", "N", "n", "E", "e",
+		"u", "U", "o", "O"
 	];
 	
 	var string = '';
